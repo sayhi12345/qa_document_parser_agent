@@ -1,0 +1,28 @@
+stages:
+  - build
+  - deploy
+  - test
+
+default:
+  tags:
+    - ll
+
+variables:
+  CI_REGISTRY_IMAGE_FIGMA_AGENTS: TBD
+
+# build-ai-figma-agents-api:
+#   stage: build
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "release" || $CI_COMMIT_BRANCH == "develop"'
+#   image:
+#     name: gcr.io/kaniko-project/executor:debug
+#     entrypoint: [""]
+#   cache: {}
+#   before_script:
+#     - echo "before building $CI_REGISTRY_IMAGE_FIGMA_AGENTS"
+#   after_script:
+#     - echo "finish building $CI_REGISTRY_IMAGE_FIGMA_AGENTS"
+#   script:
+#     - mkdir -p /kaniko/.docker
+#     - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+#     - /kaniko/executor --snapshotMode=time --single-snapshot --use-new-run --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE_FIGMA_AGENTS:$CI_COMMIT_SHORT_SHA --destination $CI_REGISTRY_IMAGE_FIGMA_AGENTS:latest

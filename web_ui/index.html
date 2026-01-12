@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Parser Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/ui/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <main class="container">
+        <header class="header">
+            <div class="badge">New</div>
+            <span class="badge-text">AI Agent for Document Parser</span>
+        </header>
+
+        <h1 class="hero-title">
+            <span class="gradient-text">Document</span> Parser
+        </h1>
+
+        <p class="subtitle">
+            Generate summaries and Q&A from your documents instantly with AI.
+        </p>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input type="text" id="doc-url" placeholder="Paste your Document URL here..." autocomplete="off">
+                <button id="parse-btn" class="action-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <div class="options">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="upload-confluence" checked>
+                    <span class="checkmark"></span>
+                    <span class="label-text">上傳到Confluence</span>
+                </label>
+                <div class="folder-selection" id="folder-selection">
+                    <select id="confluence-folder" class="custom-select" style="margin-left: 0.5rem;">
+                        <option value="3412262946" selected>活動</option>
+                        <option value="3359834148">產品</option>
+                    </select>
+                </div>
+                <!-- add spaces between these two containers -->
+                <label class="checkbox-container">
+                    <input type="checkbox" id="search-activity-node" checked>
+                    <span class="checkmark"></span>
+                    <span class="label-text">只截取活動說明頁</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Parsing your design...</p>
+        </div>
+
+        <div id="result-container" class="hidden">
+            <div class="result-header">
+                <h2>Result</h2>
+                <button id="copy-btn" class="secondary-btn">Copy Markdown</button>
+            </div>
+            <div id="result-content" class="markdown-body"></div>
+        </div>
+    </main>
+
+    <script src="/ui/script.js"></script>
+</body>
+
+</html>
