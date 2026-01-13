@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 def load_env_json():
@@ -15,15 +16,23 @@ def load_env_json():
         Path(__file__).parent.parent / "env.json"
     ]
     
+    config_dict = {}
+    
     for env_path in paths_to_check:
         if env_path.exists():
             try:
                 with open(env_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    # print(f"Loaded configuration from {env_path}")
-                    return data
+                    config_dict = json.load(f)
+                    break
             except Exception as e:
                 print(f"Warning: Failed to load {env_path}: {e}")
     
-    # Return empty dict if no config file found
-    return {}
+    # Merge with os.environ: env.json (if present and not empty) takes precedence
+    # Only use os.environ if the value in config_dict is empty or missing
+    merged_config = os.environ.copy()
+    
+    for key, value in config_dict.items():
+        if value: # If value is not empty string, None, etc.
+            merged_config[key] = value
+            
+    return merged_config
