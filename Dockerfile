@@ -13,8 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Expose port 8089
-EXPOSE 8089
+EXPOSE 8000
 
 # Run server.py when the container launches
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8089"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
